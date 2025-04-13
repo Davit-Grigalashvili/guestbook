@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guestbook</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<div class="container">
+    <h1>📖 სტუმართა წიგნი</h1>
+<h1></h1>
+    <form action="/submit" method="POST">
+        <input type="text" name="name" placeholder="შეიყვანე შენი სახელი" required
+               oninvalid="this.setCustomValidity('გშეიყვანე სახელი')"
+               oninput="this.setCustomValidity('')">
+        <textarea name="message" placeholder="შეიყვანე შეტყობინება" required
+                  oninvalid="this.setCustomValidity('შეიყვანე შეტყობინება')"
+                  oninput="this.setCustomValidity('')"></textarea>
+        <button type="submit">გაგზავნა</button>
+    </form>
+
+    <form action="/clear" method="POST">
+        <button type="submit" class="clear-button">გასუფთავება</button>
+    </form>
+    <hr>
+
+    <h2>💬 შეტყობინებები:</h2>
+    <% if (messages.length === 0) { %>
+        <p>ჯერჯერობით არ არის შეტყობინებები.</p>
+    <% } else { %>
+        <ul>
+            <% messages.forEach(msg => { %>
+                <li>
+                    <P><strong><%= msg.name %></strong>
+                        ტექსტი: <%= msg.message %></P>
+                    (<%= msg.date %>)
+                </li>
+            <% }); %>
+        </ul>
+    <% } %>
+</div>
+</body>
+</html>
